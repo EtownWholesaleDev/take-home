@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Sofia&display=swap');
+
+:root {
+    --background-color: #ffffff;
+    --accent: #313131;
+    --secondary: #F3B391;
+    --text-color: #ffffff;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+}
+
+header {
+    color: black;
+    padding: 2em 1em;
+    margin: auto;
+    margin-bottom: 10em;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.categories{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 1em;
+    align-items: center;
+}
+@media (max-width: 900px){
+    .categories{
+        width: 100%;
+        flex-basis: 100%;
+        justify-content: space-between;
+        order: 100;
+        margin-top: 1em;
+    }
+}
+.categories button{
+    background-color: transparent;
+    border: none;
+    color: #313131;
+    cursor: pointer;
+    font-size: 1.1em;
+    border: solid 1px #313131;
+    border-radius: 999px;
+    padding: 0.5em 1em;
+}
+
+
+.categories button:hover, .categories button.active{
+    background-color: #313131;
+    color: white;
+}
+
+
+header h1 {
+    font-size: 2em;
+    margin: 0;
+    font-family: "Sofia", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h1 {
+    margin: 0;
+}
+
+nav {
+    margin: 20px 0;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    min-height: 100vh;
+    box-sizing: border-box;
+    font-size: 0.9em;
+}
+
+.product-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-gap: 20px;
+    padding: 1em;
+}
+
+.product-grid article img{
+    width: 100%;
+    object-fit: contain;
+    aspect-ratio: 1/1;
+}
+
+.product-grid article{
+    border-radius: 5px;
+    aspect-ratio: 3/4;
+    height: 100%;
+    overflow: hidden;
+}
+.product-grid article div{
+    height: 100%;
+    overflow: hidden;
+}
+
+footer {
+    background: var(--accent);
+    color: var(--text-color);
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.title{
+    font-size: 1em;
+    text-align: left;
+    text-overflow: ellipsis;
+    max-height: 2em;
+}
+
+
+header .search{
+    display: flex;
+    align-items: center;
+    border: solid 1px #313131;
+    border-radius: 100px;
+}
+.search:focus-within{
+    outline: solid 1px #000000;
+}
+.search input{
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    margin-right: 1em;
+    background-color: transparent;
+}
+.search input:focus{
+    outline: none;
+}
+.search input::placeholder{
+    color: #313131;
+}
+.search button{
+    background-color: transparent;
+    color: white;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+}
