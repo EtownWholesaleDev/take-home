@@ -2,6 +2,8 @@
  * You are welcome to change and update any code within this file as part of your solution
  */
 
+import { getCartLocalStorage, setCartLocalStorage } from "./cart.js";
+
 // Fetch products from the API and display them on the page
 document.addEventListener('DOMContentLoaded', async () => {
     await fetchCategories()
@@ -36,10 +38,15 @@ function createProductElement(product) {
     productElement.classList.add('product');
     productElement.innerHTML = `
         <img src="${product.image}" alt="${product.title}" class="product-image">
-        <h2 class="title">${product.title}</h2>
-        <p class="price">$${product.price}</p>
-        <div></div>
-    `;
+        <hr>
+        <div>
+            <h2 class="title">${product.title}</h2>
+            <p class="price">$${product.price}</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
+    `
+    productElement.querySelector('.add-to-cart').addEventListener('click', e => addProductToCart(product, e.currentTarget))
+
     return productElement;
 }
 
@@ -88,6 +95,8 @@ function fetchProductsFromCategory(category) {
         fetch(`https://fakestoreapi.com/products/category/${category}`)
             .then(response => response.json())
             .then(data => {
+                console.log(data);
+                
                 displayProducts(data)
                 endProductsLoading()
             })
@@ -114,4 +123,31 @@ function createCategoryElement(category) {
     categoryElement.innerText = category
     categoryElement.setAttribute('data-category', category)
     return categoryElement
+}
+
+// Add an item to the cart
+function addProductToCart(product, addToCartBtn) {
+    addToCartBtn.setAttribute('disabled', '')
+    addToCartBtn.innerText = 'Added'
+
+    const cart = getCartLocalStorage()
+    
+    const existingItem = cart.find(item => item.id === product.id)
+
+    if (existingItem) existingItem.quantity += 1
+    else cart.push({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        description: product.description,
+        category: product.category,
+        image: product.image,
+        quantity: 1
+    })
+    
+    setCartLocalStorage(cart)
+    setTimeout(() => {
+        addToCartBtn.innerText = 'Add to Cart'
+        addToCartBtn.removeAttribute('disabled')
+    }, 1000)
 }
