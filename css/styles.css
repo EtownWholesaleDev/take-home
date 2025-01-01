@@ -194,6 +194,7 @@ header .search{
 .categories {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .category {
@@ -252,4 +253,12 @@ header .search{
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 600px) {
+    .category {
+        font-size: 0.8em;
+        font-weight: bold;
+        padding: 0.5rem 1rem;
+    }
 }
