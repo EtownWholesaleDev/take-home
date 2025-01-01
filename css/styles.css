@@ -18,7 +18,7 @@ header {
     color: black;
     padding: 2em 1em;
     margin: auto;
-    margin-bottom: 10em;
+    margin-bottom: 5em;
     max-width: 1200px;
     display: flex;
     justify-content: space-between;
@@ -26,12 +26,15 @@ header {
     flex-wrap: wrap;
     gap: 1rem;
 }
-header h1 {
+
+header .shop-logo {
     font-size: 2em;
     margin: 0;
     font-family: "Sofia", serif;
     font-weight: 400;
     font-style: normal;
+    color: var(--accent);
+    text-decoration: none;
 }
 
 h1 {
@@ -63,8 +66,8 @@ main {
 
 .product-grid{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
     padding: 1em;
 }
 
@@ -74,15 +77,30 @@ main {
     aspect-ratio: 1/1;
 }
 
-.product-grid article{
-    border-radius: 5px;
+.product-grid article {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 1.5rem;
+    background-color: var(--background-color);
     aspect-ratio: 3/4;
     height: 100%;
     overflow: hidden;
+    filter: drop-shadow(1px 1px 5px color-mix(in srgb, var(--accent) 20%, transparent));
 }
-.product-grid article div{
-    height: 100%;
-    overflow: hidden;
+
+.product-grid article hr {
+    height: 1px;
+    width: 100%;
+    background-color: color-mix(in srgb, var(--accent) 20%, transparent);
+    border: 0;
+}
+
+.product-grid article div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0 1rem;
 }
 
 footer {
@@ -99,7 +117,45 @@ footer {
     font-size: 1em;
     text-align: left;
     text-overflow: ellipsis;
-    max-height: 2em;
+    max-height: 2.5em;
+}
+
+.title,
+.price {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.add-to-cart {
+    background-color: darkslategray;
+    border: 0;
+    width: fit-content;
+    width: 8rem;
+    padding: 0.5rem 0;
+    color: #ffffff;
+    font-size: 1em;
+    align-self: center;
+    margin-top: auto;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: all 0.1s ease-in-out;
+}
+
+.add-to-cart:hover {
+    background-color: teal;
+    transform: scale(1.01);
+}
+
+.add-to-cart:active {
+    background-color: darkslategray;
+    transform: scale(0.99);
+}
+
+.add-to-cart:hover[disabled],
+.add-to-cart:active[disabled] {
+    background-color: darkslategray;
+    transform: scale(1);
 }
 
 
