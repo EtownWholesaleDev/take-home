@@ -133,3 +133,29 @@ header .search{
     border-radius: 100px;
     cursor: pointer;
 }
+
+
+.filters {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    gap: 1em;
+}
+
+.filters input.filter {
+    border-radius: 2em;
+
+    padding: 0.4em 1em;
+    background-color: transparent;
+
+    line-height: normal;
+    font-size: 1.3em;
+}
+
+.filters input.filter[data-selected], .filters input.filter:hover {
+    cursor: pointer;
+
+    border-color: black;
+    background-color: black;
+    color: white;
+}
