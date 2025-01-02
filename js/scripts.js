@@ -2,6 +2,27 @@
  * You are welcome to change and update any code within this file as part of your solution
  */
 
+
+// State object
+const appStates = {
+    products: {
+        value: [],
+        filters: {
+            contains: ""
+        },
+        display: function() {
+            if (this.filters.contains) {
+                const filteredProducts = this.value.filter(
+                    product => product.title.toLowerCase().includes(this.filters.contains.toLowerCase())
+                );
+                displayProducts(filteredProducts)
+            } else {
+                displayProducts(this.value);
+            }
+        }
+    }
+};
+
 // Fetch products from the API and display them on the page
 document.addEventListener("DOMContentLoaded", async () => {
     [products, categories] = await Promise.all([fetchProducts(), fetchCategories()]);
@@ -17,6 +38,10 @@ async function fetchProducts(category) {
     }
     return fetch(requestUrl)
         .then(response => response.json())
+        .then(data => {
+            appStates.products.value = data;
+            return data;
+        })
         .catch(error => console.error("Error fetching products:", error));
 }
 
@@ -74,7 +99,7 @@ function displayFilters(categories) {
 
             fetchProducts(category === "all" ? null : category)
                 .then(products => {
-                    displayProducts(products);
+                    appStates.products.display();
                 });
         });
 
