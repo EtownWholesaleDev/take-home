@@ -59,11 +59,21 @@ function createProductElement(product) {
 
 // Display all category filter buttons
 function displayFilters(categories) {
-    let categoriesWithAll = ["all", ...categories];
-    const filters = document.querySelector(".filters");
+    let categoriesWithAll = ["all", ...categories]; 
+    const filtersElement = document.querySelector(".filters");
     categoriesWithAll.forEach(category => {
         const filterElement = createFilterElement(category);
-        filters.appendChild(filterElement);
+        filterElement.addEventListener("click", () => {
+            filtersElement.dataset.category = category;
+            //Visually unselect filter buttons
+            [...filtersElement.children].forEach(child => {
+                delete child.dataset.selected;
+            });
+
+            filterElement.dataset.selected = "";
+        });
+
+        filtersElement.appendChild(filterElement);
     });
 }
 
@@ -73,5 +83,10 @@ function createFilterElement(category) {
     filterElement.setAttribute("type", "button");
     filterElement.setAttribute("value", category);
     filterElement.classList.add("filter");
+
+    if (category === "all") {
+        filterElement.dataset.selected = "";
+    }
+
     return filterElement;
 }
