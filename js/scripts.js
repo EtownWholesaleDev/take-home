@@ -3,8 +3,8 @@
  */
 
 // Fetch products from the API and display them on the page
-    [products] = await Promise.all([fetchProducts()]);
 document.addEventListener("DOMContentLoaded", async () => {
+    [products, categories] = await Promise.all([fetchProducts(), fetchCategories()]);
     displayProducts(products);
 });
 
@@ -12,7 +12,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function fetchProducts() {
     return fetch("https://fakestoreapi.com/products")
         .then(response => response.json())
-        .catch(error => console.error('Error fetching products:', error));
+        .catch(error => console.error("Error fetching products:", error));
+}
+
+// Fetch categories from the API, checking sessionStorage first
+async function fetchCategories() {
+    const categories = sessionStorage.getItem("productCategories");
+    if (categories) return JSON.parse(categories);
+
+    return fetch("https://fakestoreapi.com/products/categories")
+        .then(response => response.json())
+        .then(data => {
+            sessionStorage.setItem("productCategories", JSON.stringify(data));
+            return data;
+        })
+        .catch(error => console.error("Error fetching categories:", error));
 }
 
 // Display all products on the page based on the given data
