@@ -28,6 +28,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     [products, categories] = await Promise.all([fetchProducts(), fetchCategories()]);
     displayFilters(categories);
     displayProducts(products);
+
+    //Setup search button
+    const searchElement = document.querySelector(".search");
+    const searchTextElement = searchElement.querySelector("input[type=\"text\"");
+    const searchButtonElement = searchElement.querySelector("button");
+    const onSearch = () => {
+        const searchText = searchTextElement.value;
+        appStates.products.filters.contains = searchText;
+        appStates.products.display();
+    };
+    searchButtonElement.addEventListener("click", onSearch);
+    searchTextElement.addEventListener("keyup", e => {
+        if (e.key === "Enter") {
+            onSearch();
+        }
+    });
 });
 
 // Fetch products from the API
