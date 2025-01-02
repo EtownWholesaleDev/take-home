@@ -3,18 +3,15 @@
  */
 
 // Fetch products from the API and display them on the page
-document.addEventListener('DOMContentLoaded', () => {
-    fetchProducts();
+document.addEventListener('DOMContentLoaded', async () => {
+    [products] = await Promise.all([fetchProducts()]);
+    displayProducts(products);
 });
 
 // Fetch products from the API
-function fetchProducts() {
-    fetch('https://fakestoreapi.com/products')
+async function fetchProducts() {
+    return fetch('https://fakestoreapi.com/products')
         .then(response => response.json())
-        .then(data => {
-            displayProducts(data);
-            displayCategories(getAllCategories(data));
-        })
         .catch(error => console.error('Error fetching products:', error));
 }
 
