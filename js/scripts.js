@@ -9,8 +9,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // Fetch products from the API
-async function fetchProducts() {
-    return fetch("https://fakestoreapi.com/products")
+async function fetchProducts(category) {
+    let requestUrl = "https://fakestoreapi.com/products";
+    if (category) {
+        requestUrl += `/category/${category}`;
+    }
+    return fetch(requestUrl)
         .then(response => response.json())
         .catch(error => console.error("Error fetching products:", error));
 }
