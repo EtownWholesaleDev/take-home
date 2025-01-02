@@ -65,12 +65,17 @@ function displayFilters(categories) {
         const filterElement = createFilterElement(category);
         filterElement.addEventListener("click", () => {
             filtersElement.dataset.category = category;
-            //Visually unselect filter buttons
+            //Visually deselect filter buttons
             [...filtersElement.children].forEach(child => {
                 delete child.dataset.selected;
             });
 
             filterElement.dataset.selected = "";
+
+            fetchProducts(category === "all" ? null : category)
+                .then(products => {
+                    displayProducts(products);
+                });
         });
 
         filtersElement.appendChild(filterElement);
