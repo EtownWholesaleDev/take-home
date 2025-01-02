@@ -5,6 +5,7 @@
 // Fetch products from the API and display them on the page
 document.addEventListener("DOMContentLoaded", async () => {
     [products, categories] = await Promise.all([fetchProducts(), fetchCategories()]);
+    displayFilters(categories);
     displayProducts(products);
 });
 
@@ -56,3 +57,21 @@ function createProductElement(product) {
     return productElement;
 }
 
+// Display all category filter buttons
+function displayFilters(categories) {
+    let categoriesWithAll = ["all", ...categories];
+    const filters = document.querySelector(".filters");
+    categoriesWithAll.forEach(category => {
+        const filterElement = createFilterElement(category);
+        filters.appendChild(filterElement);
+    });
+}
+
+// Function to build each filter button element
+function createFilterElement(category) {
+    const filterElement = document.createElement("input");
+    filterElement.setAttribute("type", "button");
+    filterElement.setAttribute("value", category);
+    filterElement.classList.add("filter");
+    return filterElement;
+}
