@@ -1,9 +1,30 @@
 <script setup>
-  import SearchIcon from './icons/IconSearch.vue'
+  import Product from './Product.vue'
+
+  import { ref, onMounted } from 'vue';
+
+  const products = ref([]);
+
+  const fetchProducts = (category) => {
+    let requestUrl = "https://fakestoreapi.com/products";
+    if (category) {
+        requestUrl += `/category/${category}`;
+    }
+    return fetch(requestUrl)
+        .then(response => response.json())
+        .then(data => {
+            products.value = data;
+            return data;
+        })
+        .catch(error => console.error("Error fetching products:", error));
+  }
+
+  onMounted(fetchProducts);
 </script>
 
 <template>
   <section class="product-grid">
+    <Product v-for="product in products" :product-info="product"></Product>
   </section>
 </template>
 
