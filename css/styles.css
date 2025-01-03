@@ -26,6 +26,28 @@ header {
     flex-wrap: wrap;
 }
 
+.categories-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .5rem;
+    padding: .25rem;
+}
+
+.categories-container button {
+    border: solid 1px #313131;
+    border-radius: 100px;
+    background-color: transparent;
+    padding: .7rem;
+}
+
+.categories-container button:hover,
+.categories-container button:focus {
+    cursor: pointer;
+    background-color: var(--accent);
+    color: var(--background-color);
+}
+
 header h1 {
     font-size: 2em;
     margin: 0;
@@ -61,26 +83,27 @@ main {
     font-size: 0.9em;
 }
 
-.product-grid{
+.product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     grid-gap: 20px;
     padding: 1em;
 }
 
-.product-grid article img{
+.product-grid article img {
     width: 100%;
     object-fit: contain;
     aspect-ratio: 1/1;
 }
 
-.product-grid article{
+.product-grid article {
     border-radius: 5px;
     aspect-ratio: 3/4;
     height: 100%;
     overflow: hidden;
 }
-.product-grid article div{
+
+.product-grid article div {
     height: 100%;
     overflow: hidden;
 }
@@ -95,7 +118,7 @@ footer {
     width: 100%;
 }
 
-.title{
+.title {
     font-size: 1em;
     text-align: left;
     text-overflow: ellipsis;
@@ -103,29 +126,34 @@ footer {
 }
 
 
-header .search{
+header .search {
     display: flex;
     align-items: center;
-    border: solid 1px #313131;
+    border: solid 1px var(--accent);
     border-radius: 100px;
 }
-.search:focus-within{
+
+.search:focus-within {
     outline: solid 1px #000000;
 }
-.search input{
+
+.search input {
     padding: 0.5em;
     border-radius: 5px;
     border: none;
     margin-right: 1em;
     background-color: transparent;
 }
-.search input:focus{
+
+.search input:focus {
     outline: none;
 }
-.search input::placeholder{
-    color: #313131;
+
+.search input::placeholder {
+    color: var(--accent);
 }
-.search button{
+
+.search button {
     background-color: transparent;
     color: white;
     padding: 0.5em 1em;
