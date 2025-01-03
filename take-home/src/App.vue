@@ -1,7 +1,7 @@
 <script setup>
   import { RouterLink, RouterView } from 'vue-router'
   import Search from './components/Search.vue'
-
+  import './assets/main.scss'
   
 </script>
 
@@ -20,5 +20,5 @@
 </template>
 
 <style scoped>
-
+  
 </style>
