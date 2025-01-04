@@ -13,7 +13,7 @@ const props = defineProps({
 const emit = defineEmits(["select"])
 
 const onSelect = (e) => {
-  emit("select", props.category);
+  emit("select", props.category === "all" ? "" : props.category);
 };
 </script>
 
