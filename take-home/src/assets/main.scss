@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Sofia&display=swap');
+
+:root {
+    --background-color: #ffffff;
+    --accent: #313131;
+    --secondary: #F3B391;
+    --text-color: #ffffff;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+}
+
+header {
+    color: black;
+    padding: 2em 1em;
+    margin: auto;
+    margin-bottom: 10em;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    & h1 {
+        font-size: 2em;
+        margin: 0;
+        font-family: "Sofia", serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+}
+
+h1 {
+    margin: 0;
+}
+
+nav {
+    margin: 20px 0;
+
+    & a {
+        color: var(--text-color);
+        text-decoration: none;
+        margin: 0 15px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+main {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    min-height: 100vh;
+    box-sizing: border-box;
+    font-size: 0.9em;
+}
+
+footer {
+    background: var(--accent);
+    color: var(--text-color);
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.title{
+    font-size: 1em;
+    text-align: left;
+    text-overflow: ellipsis;
+    max-height: 2em;
+}
