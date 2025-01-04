@@ -33,12 +33,16 @@ const onSelect = (category) => {
   store.setFilterCategory(category);
 };
 
+const hasLoaded = computed(() => {
+  return categories.value.length > 0;
+});
+
 onMounted(fetchCategories);
 </script>
 
 <template>
   <div class="filters">
-    <Filter category="all" :selected="isSelected('')" @select="onSelect"></Filter>
+    <Filter v-if="hasLoaded" category="all" :selected="isSelected('')" @select="onSelect"></Filter>
     <Filter v-for="category in categories" :category="category" :selected="isSelected(category)" @select="onSelect"></Filter>
   </div>
 </template>
