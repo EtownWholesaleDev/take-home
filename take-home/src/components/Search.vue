@@ -1,11 +1,27 @@
 <script setup>
-  import SearchIcon from './icons/IconSearch.vue'
+  import SearchIcon from './icons/IconSearch.vue';
+  import { ref } from 'vue';
+  import { useProductStore } from '@/stores/products';
+
+  const store = useProductStore();
+
+  const searchString = ref("");
+
+  const onSearch = () => {
+    store.setFilterContains(searchString.value);
+  };
+
+  const onKeyUp = (e) => {
+    if (e.key === "Enter") {
+      onSearch();
+    }
+  };
 </script>
 
 <template>
   <div class="search">
-    <input type="text" placeholder="Search">
-    <button>
+    <input v-model="searchString" type="text" placeholder="Search" @keyup="onKeyUp">
+    <button @click="onSearch">
         <SearchIcon></SearchIcon>
     </button>
   </div>
