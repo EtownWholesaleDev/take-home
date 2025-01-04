@@ -1,27 +1,20 @@
 <script setup>
 import Filter from './Filter.vue';
-
 import { ref, onMounted, computed } from 'vue';
+import { useProductStore } from '@/stores/products';
+
+const store = useProductStore();
 
 const categories = ref([]);
 
-const formatCategories = (categories) => {
-  return categories.map((category) => {
-    return {
-      title: category,
-      selected: false
-    }
-  }); 
-}
-
-const getSelected = (categoryName) => {
-  return categories.value.find((c) => c.title === categoryName).selected;
+const isSelected = (categoryName) => {
+  return store.category === categoryName;
 }
 
 const fetchCategories = (category) => {
   const storedCategories = sessionStorage.getItem("productCategories");
   if (storedCategories) {
-    categories.value = formatCategories(JSON.parse(storedCategories));
+    categories.value = JSON.parse(storedCategories);
     return storedCategories;
   }
 
@@ -29,7 +22,7 @@ const fetchCategories = (category) => {
       .then(response => response.json())
       .then(data => {
           sessionStorage.setItem("productCategories", JSON.stringify(data));
-          categories.value = formatCategories(data);
+          categories.value = data;
           return data;
       })
       .catch(error => console.error("Error fetching categories:", error));
@@ -37,7 +30,7 @@ const fetchCategories = (category) => {
 
 const selection = ref();
 const onSelect = (category) => {
-  console.log(category);
+  store.setFilterCategory(category);
 };
 
 onMounted(fetchCategories);
@@ -45,7 +38,7 @@ onMounted(fetchCategories);
 
 <template>
   <div class="filters">
-    <Filter v-for="category in categories" :category="category.title" :selected="getSelected(category.title)" @select="onSelect"></Filter>
+    <Filter v-for="category in categories" :category="category" :selected="isSelected(category)" @select="onSelect"></Filter>
   </div>
 </template>
 
