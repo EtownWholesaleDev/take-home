@@ -18,7 +18,7 @@ const onSelect = (e) => {
 </script>
 
 <template>
-  <input type="button" class="filter" :value="category" @click="onSelect"/>
+  <input type="button" :class="{ filter: true, selected: selected }" :value="category" @click="onSelect" />
 </template>
 
 <style scoped lang="scss">
@@ -31,7 +31,7 @@ input.filter {
   line-height: normal;
   font-size: 1.3em;
 
-  &[data-selected], &:hover {
+  &.selected, &:hover {
     cursor: pointer;
     border-color: black;
     background-color: black;
