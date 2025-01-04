@@ -1,9 +1,10 @@
 <script setup>
   import Product from './Product.vue'
+  import { ref, onMounted, computed } from 'vue'
+  import { useProductStore } from '@/stores/products'
 
-  import { ref, onMounted } from 'vue';
-
-  const products = ref([]);
+  const store = useProductStore();
+  const filteredProducts = computed(() => store.filteredProducts);
 
   const fetchProducts = (category) => {
     let requestUrl = "https://fakestoreapi.com/products";
@@ -13,7 +14,7 @@
     return fetch(requestUrl)
         .then(response => response.json())
         .then(data => {
-            products.value = data;
+          store.setProducts(data);
             return data;
         })
         .catch(error => console.error("Error fetching products:", error));
@@ -24,7 +25,7 @@
 
 <template>
   <section class="product-grid">
-    <Product v-for="product in products" :product-info="product"></Product>
+    <Product v-for="product in filteredProducts" :product-info="product"></Product>
   </section>
 </template>
 
