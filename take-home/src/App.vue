@@ -1,5 +1,6 @@
 <script setup>
   import { RouterLink, RouterView } from 'vue-router'
+  import Filters from './components/Filters.vue'
   import Search from './components/Search.vue'
   import './assets/main.scss'
   
@@ -8,7 +9,7 @@
 <template>
   <header>
         <h1>Shop</h1>
-        <div class="filters"></div>
+        <Filters></Filters>
         <Search></Search>
     </header>
     <main>
